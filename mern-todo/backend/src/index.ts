@@ -4,14 +4,18 @@ import connectDB from './config/db';
 import dotenv from 'dotenv'
 import userRoutes from './routes/user.route'
 import todoRoutes from './routes/todo.route'
-import cookieParser from "cookie-parser";
+import cookieParser from 'cookie-parser';
 
 const app = express();
-app.use(cors());
+app.use(cors(
+    {
+        origin: "http://localhost:5173", // frontend ka exact URL
+        credentials: true,
+    }
+));
+app.use(cookieParser())
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json())
-app.use(cookieParser());
-
 
 
 dotenv.config();

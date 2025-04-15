@@ -6,18 +6,24 @@ import App from './App.tsx'
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Signin from './components/Signin.tsx';
 import Signup from './components/Signup.tsx';
-
+import UserProvider from './context/UserProvider.tsx';
+import Layout from './components/Layout.tsx';
+import ProtectedRoute from './components/ProtectedRoute.tsx';
 
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>
-
-    <Router>
-      <Routes>
-        <Route path="/" element={<App />} />
-        <Route path="/login" element={<Signin />} />
-      </Routes>
-    </Router>
+    <UserProvider>
+      <Router>
+        <Routes>
+          <Route element={<Layout />} >
+            <Route path="/" element={<ProtectedRoute> <App /></ProtectedRoute>} />
+            <Route path="/signup" element={<Signup />} />
+            <Route path="/login" element={<Signin />} />
+          </Route>
+        </Routes>
+      </Router>
+    </UserProvider>
 
   </StrictMode>,
 )

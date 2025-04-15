@@ -2,8 +2,10 @@ import React, { useState } from 'react'
 import { BACKEND_URL } from '../config';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import { useAuth } from '../context/UserProvider';
 
 function Signin() {
+    const { login } = useAuth();
 
 
 
@@ -27,8 +29,10 @@ function Signin() {
         e.preventDefault();
         console.log(formData)
 
-        const { data } = await axios.post(`${BACKEND_URL}/api/user/login`, formData)
+        const { data } = await axios.post(`${BACKEND_URL}/api/user/login`, formData, { withCredentials: true })
         if (data.success) {
+            login("sushil")
+            console.log(data)
             navigate('/')
         }
     }

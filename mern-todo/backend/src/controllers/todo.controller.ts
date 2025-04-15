@@ -5,18 +5,22 @@ import { AuthenticatedRequest } from "../types/global";
 
 
 
-const getAllTodos = async (req: AuthenticatedRequest, res: Response) => {
+const getUserTodos = async (req: AuthenticatedRequest, res: Response) => {
 
     try {
-        const allTodos = await Todo.find({});
 
-        if (!allTodos) {
+        if (!req.user) {
+            return;
+        }
+        const userTodos = await Todo.find({ userId: req.user._id });
+
+        if (!userTodos) {
             throw new Error("Error while fetching Todos")
         }
         res.json({
             success: true,
             message: "todos fetched successfully",
-            data: allTodos
+            data: userTodos
         })
     } catch (error) {
 
@@ -109,4 +113,4 @@ const toggleTodo = async (req: AuthenticatedRequest, res: Response) => {
     })
 }
 
-export { updateTodo, addTodo, deleteTodo, toggleTodo, getAllTodos };
+export { updateTodo, addTodo, deleteTodo, toggleTodo, getUserTodos };

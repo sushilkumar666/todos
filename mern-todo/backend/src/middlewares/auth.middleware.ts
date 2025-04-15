@@ -17,7 +17,7 @@ export const verifyJWT = (
             const token =
                 req.cookies?.accessToken ||
                 req.header("Authorization")?.replace("Bearer ", "");
-
+            // console.log(token + " this is vlaue of token")
             if (!token) {
                 throw new Error("Unauthorized request");
             }
@@ -26,7 +26,7 @@ export const verifyJWT = (
                 token,
                 process.env.ACCESS_TOKEN_SECRET as string
             ) as DecodedToken;
-            console.log()
+
             if (!decoded) {
                 throw new Error("Error while decoding token")
             }

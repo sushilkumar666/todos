@@ -67,15 +67,17 @@ const login = async (req: AuthenticatedRequest, res: Response) => {
             }
         )
 
+        // console.log(accessToken + " this is access toke whie login")
         const httpOptions = {
             httpOnly: true
         }
 
-        res.cookie("accessToken", accessToken, httpOptions).json({
+        res.cookie("accessToken", accessToken, httpOptions);
+        res.status(200).json({
             success: true,
-            message: "user loggedin Successfully",
-            accessToken
-        })
+            message: "User logged in successfully",
+            accessToken,
+        });
 
     } catch (error: any) {
         res.json({
