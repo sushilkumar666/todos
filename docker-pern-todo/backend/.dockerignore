@@ -1,0 +1,35 @@
+# node modules (never copy these)
+node_modules
+**/node_modules
+
+# build output
+dist
+.build
+.next
+out
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+# dotenvs
+.env
+.env.*  # like .env.local, .env.production
+
+# local IDE/editor configs
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Docker itself
+docker-compose*.yml
+Dockerfile*
+
+# test coverage/output
+coverage
+*.log
